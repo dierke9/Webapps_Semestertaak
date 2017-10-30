@@ -40,3 +40,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/3rdParty
+/forumbackend/node_modules

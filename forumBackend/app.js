@@ -4,6 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+let mongoose = require('mongoose');
+require('./models/User');
+require('./models/Article');
+require('./models/Post');
+require('./models/Thread');
+require('./models/SubCategory');
+require('./models/Category');
+
+mongoose.connect('mongodb://localhost/forum', {  useMongoClient: true });
 
 var index = require('./routes/index');
 var users = require('./routes/users');
