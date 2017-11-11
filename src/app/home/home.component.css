@@ -1,0 +1,12 @@
+.main{
+    margin-left: 25%;
+    margin-right: 25%;
+    display: block;
+}
+
+.main-article{
+    width: 48%;
+    float: left;
+    margin: 1%;
+    height: 300px;
+}

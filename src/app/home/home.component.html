@@ -1,0 +1,10 @@
+<div class="main">
+  <div class="card main-article" *ngFor="let article of articles | async">
+    <a href="#">
+      <img class="card-img-top img-main" src="../../assets/{{article.image}}" />
+      <div class="card-body">
+        <h4 class="card-title main-article">{{article.Title}}</h4>
+      </div>
+    </a>
+  </div>
+</div> 

@@ -1,0 +1,42 @@
+<div class="centered">
+  <div class="form">
+    <form [formGroup]='login' (ngSubmit)='onLogin()'>
+      <h2>Login</h2>
+      <div class="form-group">
+        <label for="username">Username: </label>
+        <input type="text" id='username' formControlName="loginusername" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for='password'>Password: </label>
+        <input type="password" id="password" formControlName="loginpassword" class="form-control"/>
+      </div>
+      <button class="btn btn-primary">Log In</button>
+    </form>
+  </div>
+  <div class="form right">
+    <h2>Registreer</h2>
+    <form [formGroup]='register' (ngSubmit)='onRegister()'>
+      <div class="form-group">
+        <label for="username">Gebruikersnaam: </label>
+        <input type="text" id="username" formControlName='username' class="form-control"/>
+        <p class="text-danger" *ngIf="register.get('username').errors?.required && register.get('username').touched">Gebruikersnaam is verplicht.</p>
+      </div>
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="email" id="email" formControlName="email" class="form-control"/>
+        <p class="text-danger" *ngIf="register.get('email').errors?.required && register.get('email').touched">Email is verplicht.</p>        
+      </div>
+      <div class="form-group">
+        <label for="password">Wachtwoord: </label>
+        <input type="password" id="password" formControlName="password" class="form-control"/>
+        <p class="text-danger" *ngIf="register.get('password').errors?.required && register.get('password').touched">Wachtwoord is verplicht.</p>
+      </div>
+      <div class="form-group">
+        <label for="repeatPassword">Herhaal wachtwoord: </label>
+        <input type="password" id="reapeatPassword" formControlName="repeatPassword" class="form-control"/>
+        <p class="text-danger" *ngIf="register.hasError('equal')">Wachtwoord is niet hetzelfde als herhaal wachtwoord</p>
+      </div>
+      <button class="btn btn-primary">Registreer </button>
+    </form>
+  </div>
+</div>
