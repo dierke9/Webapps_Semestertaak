@@ -7,6 +7,9 @@ let Post = mongoose.model('Post');
 let Thread = mongoose.model('Thread');
 let SubCategory = mongoose.model('SubCategory');
 let Category = mongoose.model('Category');
+let jwt = require('express-jwt');
+
+let auth = jwt({secret: process.env.SECRET,userProperty: 'payload'});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
