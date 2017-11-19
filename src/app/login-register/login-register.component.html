@@ -20,6 +20,7 @@
         <label for="username">Gebruikersnaam: </label>
         <input type="text" id="username" formControlName='username' class="form-control"/>
         <p class="text-danger" *ngIf="register.get('username').errors?.required && register.get('username').touched">Gebruikersnaam is verplicht.</p>
+        <p class="text-danger" *ngIf="register.get('username').errors?.usernameExists && register.get('username').touched">Deze gebruikersnaam is al gebruikt.</p>
       </div>
       <div class="form-group">
         <label for="email">Email: </label>

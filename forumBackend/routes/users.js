@@ -30,4 +30,17 @@ router.post('/login', function (req, res, next) {
   })(req, res, next);
 })
 
+router.post('/checkusername',function(req,res,next){
+  User.find({username : req.body.username}, function(err,result){
+    if(err){
+      return next(err);
+    }
+    if(result.length){
+      res.json({username : "alreadyexists"});
+    }else{
+      res.json({username: "OK"})
+    }
+  })
+})
+
 module.exports = router;

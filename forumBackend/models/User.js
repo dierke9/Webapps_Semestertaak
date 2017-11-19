@@ -2,7 +2,6 @@ let mongoose = require('mongoose');
 let crypto = require('crypto');
 let jwt = require('jsonwebtoken');
 let env = require('env2')('.env');
-console.log(process.env.SECRET);
 
 let UserShema = mongoose.Schema({
     username: {type: String, unique: true},

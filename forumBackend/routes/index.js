@@ -30,13 +30,13 @@ router.post('/API/articles/', function (req, res, next) {
     res.json(rec);
   });
 });
-router.get('/API/users/', function(req, res, next) {
+router.get('/API/getAllUsers/', function(req, res, next) {
   User.find({}).exec(function(err, recipes) {
     if (err) { return next(err); }
     res.json(recipes);
   });
 });
-
+/*
 router.post('/API/users/', function (req, res, next) {
   let user = new User(req.body);
   user.save(function(err, rec) {
@@ -44,6 +44,7 @@ router.post('/API/users/', function (req, res, next) {
     res.json(rec);
   });
 }); 
+*/
 router.get('/API/posts/', function(req, res, next) {
   Post.find({}).populate('poster').exec(function(err, recipes) {
     if (err) { return next(err); }

@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { UserDataService } from '../user-data.service';
 import { User } from './user.model';
+import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from '../user/authentication.service';
 
 @Component({
   selector: 'app-login-register',
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.css'],
-  providers: [UserDataService]
+  providers: [AuthenticationService]
 })
 export class LoginRegisterComponent implements OnInit {
   private login: FormGroup;
   private register: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: UserDataService) { }
+  constructor(private fb: FormBuilder, private service: AuthenticationService) { }
 
   ngOnInit() {
     this.login = this.fb.group({
@@ -21,7 +22,7 @@ export class LoginRegisterComponent implements OnInit {
       loginpassword: this.fb.control('',[Validators.required])
     });
     this.register = this.fb.group({
-      username: this.fb.control('',Validators.required),
+      username: ['',[Validators.required],this.checkUniqueUsername()],
       email: this.fb.control('',[Validators.required, Validators.email]),
       password: this.fb.control('',[Validators.required, Validators.minLength(6)]),
       repeatPassword: this.fb.control('',[Validators.required]) 
@@ -33,13 +34,21 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   onRegister(){
-    console.log(this.register.value);
-    this.service.register(new User(this.register.get('username').value,this.register.get('email').value,this.register.get('passwoord').value))
+    this.service.register(this.register.value.username, this.register.value.password).subscribe(val => {if(val){console.log(this.register.value);}})
+  }
+
+  checkUniqueUsername() : ValidatorFn {
+    return (control : AbstractControl):
+      Observable<{[key: string]:any }> => {
+        return this.service.checkUniqueUsername(control.value).map(availdable => availdable?null:{usernameExists: true});
+      }
   }
 
 }
 
-export function testEqual(): ValidatorFn {
+
+
+function testEqual(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
     let pwd= control.get('password');
     let repeat = control.get('repeatPassword');
