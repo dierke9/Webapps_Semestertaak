@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { User } from './user.model';
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from '../user/authentication.service';
+import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-register',
@@ -14,7 +14,7 @@ export class LoginRegisterComponent implements OnInit {
   private login: FormGroup;
   private register: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: AuthenticationService) { }
+  constructor(private fb: FormBuilder, private service: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.login = this.fb.group({
@@ -30,6 +30,7 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   onLogin(){
+    this.service.login(this.login.value.loginusername, this.login.value.loginpassword).subscribe(val => {if(val){console.log(this.login.value);this.router.navigate(['home'])}})
     console.log(this.login.value);
   }
 

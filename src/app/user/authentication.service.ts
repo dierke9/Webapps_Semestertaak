@@ -49,7 +49,7 @@ export class AuthenticationService {
 
   logout(){
     if(this._user$.getValue){
-      localStorage.removeItem('currentUser');
+      localStorage.removeItem('currentuser');
       setTimeout(() => {
         this._user$.next(null);
       });

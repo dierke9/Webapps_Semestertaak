@@ -8,7 +8,9 @@ import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
 import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
-import { LoginRegisterComponent } from './login-register/login-register.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {AppRoutingModule} from './app-routing/app-routing.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { LoginRegisterComponent } from './login-register/login-register.componen
     HeaderComponent,
     CategoryComponent,
     HomeComponent,
-    LoginRegisterComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
