@@ -4,11 +4,15 @@ import { HomeComponent } from '../home/home.component';
 import { LoginRegisterComponent } from '../user/login-register/login-register.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoriesComponent } from '../forum/categories/categories.component';
+import { CategoryDetailComponent } from '../forum/category-detail/category-detail.component';
 
 
 const approutes: Routes = [
   { path: 'home', component: HomeComponent },
- // { path: 'login', component: LoginRegisterComponent },
+  // {path: 'categories', component: CategoriesComponent},
+  // { path: 'login', component: LoginRegisterComponent },
+  
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]
@@ -18,7 +22,10 @@ const approutes: Routes = [
     CommonModule,
     RouterModule.forRoot(approutes)
   ],
-  declarations: [],
+  declarations: [
+    HomeComponent,
+    PageNotFoundComponent
+  ],
   exports: [
     RouterModule
   ]

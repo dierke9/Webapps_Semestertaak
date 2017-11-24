@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryDataService } from '../category-data.service';
-import { Category } from '../category/category.model';
+import { CategoryDataService } from '../forum/category-data.service';
 import { Observable } from 'rxjs/Rx';
 import { AuthenticationService } from '../user/authentication.service';
 

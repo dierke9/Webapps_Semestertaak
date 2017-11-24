@@ -88,7 +88,7 @@ router.post('/API/subcategories/', function (req, res, next) {
   });
 }); 
 router.get('/API/categories/', function(req, res, next) {
-  Category.find({}).exec(function(err, recipes) {
+  Category.find({}).populate('subCats').exec(function(err, recipes) {
     if (err) { return next(err); }
     res.json(recipes);
   });
