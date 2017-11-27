@@ -14,7 +14,7 @@ let ThreadShema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    lastPostTime: {type: Date, default: Date.now()}
+    lastPostTime: Date
 });
 
 mongoose.model("Thread", ThreadShema);

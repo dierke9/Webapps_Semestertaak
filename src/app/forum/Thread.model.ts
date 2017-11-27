@@ -1,4 +1,5 @@
 import { User } from "../user/User.model";
+import { Post } from "./Post.model";
 
 export class Thread{
     private _id: string;
@@ -6,18 +7,34 @@ export class Thread{
     private _creator: User;
     private _lastPost: User;
     private _lastPostTime: Date;
+    private _posts: Post[];
 
     static fromJSON(json){
         const creator = User.fromJSON(json.creator);
         const lastPost = User.fromJSON(json.lastPoster);
-        return new Thread(json.title, creator, lastPost, json.lastPostTime);
+        var t = new Thread(json.title);
+        t.id = json._id;
+        t.creator = creator;
+        t.lastPost = lastPost;
+        t.lastPostTime = json.lastPostTime;
+        return t;
     }
 
-    constructor(titel: string,  creater: User, lastPost: User, lastPostTime: Date){
+    static fromJsonWithPosts(json){
+        var posts = [];
+        for(var post of json.posts){
+            var poster = User.fromJSON(post.poster)
+            var p = new Post(post.content, poster, post.time);
+            p.id = post._id;
+            posts.push(p);
+        }
+        var t = new Thread(json.title);
+        t._posts = posts;
+        return t;
+    }
+
+    constructor(titel: string){
         this._title = titel;
-        this._creator = creater;
-        this._lastPost = lastPost;
-        this._lastPostTime = lastPostTime;
     }
 
     get title(){
@@ -51,5 +68,12 @@ export class Thread{
     }
     set id(id: string){
         this._id = id;
+    }
+
+    get posts(){
+        return this._posts;
+    }
+    set posts(posts: Post[]){
+        this._posts = posts;
     }
 }

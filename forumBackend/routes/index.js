@@ -76,8 +76,8 @@ router.post('/API/threads/', function (req, res, next) {
 router.get('/API/categoryDetail/', function (req, res, next) {
   var id = req.get('id');
   Category.findById(id)
-    .populate({ path: 'subCats', populate: { path: "threads", options: { sort: {lastPostTime: -1}, limit: 5 }, populate: { path: "creator" } } })
-    .populate({ path: 'subCats', populate: { path: "threads", options: { sort: {lastPostTime: -1}, limit: 5 }, populate: { path: "lastPoster" } } })
+    .populate({ path: 'subCats', populate: { path: "threads", options: { sort: { lastPostTime: -1 }, limit: 5 }, populate: { path: "creator" } } })
+    .populate({ path: 'subCats', populate: { path: "threads", options: { sort: { lastPostTime: -1 }, limit: 5 }, populate: { path: "lastPoster" } } })
     .exec(function (err, recipes) {
       if (err) { return next(err); }
       res.json(recipes);
@@ -106,16 +106,24 @@ router.post('/API/categories/', function (req, res, next) {
   });
 });
 
-router.get('/API/subCatDetail',function(req,res,next){
+router.get('/API/subCatDetail', function (req, res, next) {
   var id = req.get('id');
   SubCategory.findById(id)
-  .populate({path: 'threads', populate: {path: 'creator'}})
-  .populate({path: 'threads', populate: {path: 'lastPoster'}})
-  .exec(function(err,rec){
-    if(err){return next(err);}
+    .populate({ path: 'threads', options: { sort: { lastPostTime: -1 } }, populate: { path: 'creator' } })
+    .populate({ path: 'threads', options: { sort: { lastPostTime: -1 } }, populate: { path: 'lastPoster' } })
+    .exec(function (err, rec) {
+      if (err) { return next(err); }
+      res.json(rec);
+    })
+});
+
+router.get('/API/threadById', function (req, res, next) {
+  var id = req.get('id');
+  Thread.findById(id).populate({ path: 'posts', options: {sort: {time: 1}}, populate: { path: 'poster' } }).exec(function (err, rec) {
+    if (err) { return next(err); }
     res.json(rec);
   })
-});
+})
 
 
 module.exports = router;

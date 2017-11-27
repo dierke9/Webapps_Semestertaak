@@ -15,6 +15,7 @@ export class Category{
         }
         const cat = new Category(json.title, json.description, subCats);
         cat.id = json._id;
+        cat.SubCats = subCats;
         return cat;
     }
 

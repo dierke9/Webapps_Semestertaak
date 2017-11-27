@@ -20,7 +20,6 @@ export class SubcategoryComponent implements OnInit {
   }
 
   get subCategory(){
-    console.log(this._subcat);
     return this._subcat;
   }
 

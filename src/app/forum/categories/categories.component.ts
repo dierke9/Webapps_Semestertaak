@@ -17,7 +17,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   get Categories(){
-    return this._categories;
+      return this._categories;
   }
 
 }

@@ -12,7 +12,7 @@
       <tr *ngFor="let thread of subCategory.threads | slice:startThread:endThread">
         <td>
           <div>
-            <a>
+            <a routerLink="/thread/{{thread.id}}" routerLinkActive='active'>
               <b>{{thread.title}}</b>
               <p>Created by {{thread.creator.username}}</p>
               <p>Last posted at {{thread.lastPostTime}}</p>

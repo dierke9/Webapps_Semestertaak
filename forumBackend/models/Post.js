@@ -7,7 +7,8 @@ let PostSChema = mongoose.Schema({
     poster: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    time: Date
 });
 
 mongoose.model("Post", PostSChema);

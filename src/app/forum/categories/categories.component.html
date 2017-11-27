@@ -8,14 +8,12 @@
       <tbody>
         <tr *ngFor="let subcat of category.SubCats">
           <td>
-            <a routerLink='/subcat/{{subcat.id}}' routerLinkActive='active'>
-              <div>
-                <a routerLink="/thread/{{subCat.id}}" routerLinkActive="active">
-                  <p>{{subcat.Title}}</p>
-                  <p>{{subcat.Description}}</p>
-                </a>
-              </div>
-            </a>
+            <div>
+              <a routerLink="/subcat/{{subcat.id}}" routerLinkActive="active">
+                <p>{{subcat.Title}}</p>
+                <p>{{subcat.Description}}</p>
+              </a>
+            </div>
           </td>
           <td></td>
         </tr>
