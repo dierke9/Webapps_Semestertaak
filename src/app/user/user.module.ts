@@ -6,6 +6,7 @@ import {LogoutComponent} from './logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {AuthenticationService} from './authentication.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes : Routes = [
   {path: 'login', component: LoginRegisterComponent},
@@ -18,7 +19,8 @@ const routes : Routes = [
     CommonModule,
     HttpModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)    
+    RouterModule.forChild(routes),
+    NgbModule
   ],
   declarations: [
       LoginRegisterComponent,

@@ -1,0 +1,33 @@
+<div *ngIf="subCategory">
+  <h1>{{subCategory.Title}}</h1>
+  <p>{{subCategory.Description}}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Thread</th>
+        <th>Last post by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let thread of subCategory.threads | slice:startThread:endThread">
+        <td>
+          <div>
+            <a>
+              <b>{{thread.title}}</b>
+              <p>Created by {{thread.creator.username}}</p>
+              <p>Last posted at {{thread.lastPostTime}}</p>
+            </a>
+          </div>
+        </td>
+        <td>
+          <div>
+            <a>
+              <b>{{thread.lastPost.username}}</b>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination [(page)]="page" aria-label="Default pagination" [collectionSize]="ThreadCount"></ngb-pagination>     
+  </div>

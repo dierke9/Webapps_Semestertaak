@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 export class CategoryDataService {
 
   private _appUrl = 'http://localhost:4200/API/categories';
-
+  
   constructor(private http: Http) { }
 
   get categories(): Observable<Category[]> {

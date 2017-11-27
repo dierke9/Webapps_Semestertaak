@@ -12,19 +12,19 @@
           Forum
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" *ngFor='let cat of Categories | async'>{{cat.Title}}</a>
+          <a class="dropdown-item" *ngFor='let cat of Categories | async' routerLinkActive='active' routerLink="/category/{{cat.id}}">{{cat.Title}}</a>
         </div>
       </li>
     </ul>
     <ul class="nav navbar-nav justify-content-end">
-      <li class="dropdown" *ngIf="(currentuser | async) else logout">
+      <li class="dropdown" *ngIf="(currentuser | async) else Login">
         <a class="nav-link dropdown-toggle">{{currentuser | async}}</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" >Settings</a>
           <a class="dropdown-item" routerLink='/logout'>Logout</a>
         </div>
       </li>
-      <ng-template #logout>
+      <ng-template #Login>
         <li>
           <a class="nav-link" routerLinkActive='active' routerLink='/login'>
             <span class="oi oi-account-login"></span>

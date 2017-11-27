@@ -18,6 +18,16 @@ export class Category{
         return cat;
     }
 
+    static fromJSONWithSubcats(json){
+        let subCats = [];
+        for(var subcat of json.subCats){
+            subCats.push(SubCategory.fromJSON(subcat));
+        }
+        const cat = new Category(json.title, json.description, subCats);
+        cat.id = json._id;
+        return cat;
+    }
+
     constructor(title: string, description: string, subCats: SubCategory[]){
         this._title = title;
         this._description = description;

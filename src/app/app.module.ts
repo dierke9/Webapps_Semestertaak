@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { UserModule } from './user/user.module';
 import { ForumModule } from './forum/forum.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ForumModule } from './forum/forum.module';
     ReactiveFormsModule,
     ForumModule,
     UserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

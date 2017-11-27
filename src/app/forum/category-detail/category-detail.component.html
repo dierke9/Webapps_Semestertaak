@@ -1,3 +1,38 @@
-<p>
-  category-detail works!
-</p>
+<div *ngIf='category'>
+  <h1>{{category.Title}}</h1>
+  <p>{{category.Description}}</p>
+  <div *ngFor='let subCat of category.SubCats'>
+    <a routerLink="/thread/{{subCat.id}}" routerLinkActive="active">
+    <h2>{{subCat.Title}}</h2>
+    <p>{{subCat.Description}}</p>
+    </a>
+    <table>
+      <thead>
+        <tr>
+          <th>Thread</th>
+          <th>Last post by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let thread of subCat.threads'>
+          <td>
+            <div>
+              <a>
+                <b>{{thread.title}}</b>
+                <p>Created by {{thread.creator.username}}</p>
+                <p>Last posted at {{thread.lastPostTime}}</p>
+              </a>
+            </div>
+          </td>
+          <td>
+            <div>
+              <a>
+              <b>{{thread.lastPost.username}}</b>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

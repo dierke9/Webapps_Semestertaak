@@ -4,7 +4,7 @@
       <h2>Login</h2>
       <div class="form-group">
         <label for="username">Username: </label>
-        <input type="text" id='username' formControlName="loginusername" class="form-control"/>
+        <input placeholder="Username" type="text" id='username' formControlName="loginusername" class="form-control"/>
       </div>
       <div class="form-group">
         <label for='password'>Password: </label>
@@ -18,13 +18,13 @@
     <form [formGroup]='register' (ngSubmit)='onRegister()'>
       <div class="form-group">
         <label for="username">Gebruikersnaam: </label>
-        <input type="text" id="username" formControlName='username' class="form-control"/>
+        <input placeholder="Username" type="text" id="username" formControlName='username' class="form-control"/>
         <p class="text-danger" *ngIf="register.get('username').errors?.required && register.get('username').touched">Gebruikersnaam is verplicht.</p>
         <p class="text-danger" *ngIf="register.get('username').errors?.usernameExists && register.get('username').touched">Deze gebruikersnaam is al gebruikt.</p>
       </div>
       <div class="form-group">
         <label for="email">Email: </label>
-        <input type="email" id="email" formControlName="email" class="form-control"/>
+        <input placeholder="example@company.com" type="email" id="email" formControlName="email" class="form-control"/>
         <p class="text-danger" *ngIf="register.get('email').errors?.required && register.get('email').touched">Email is verplicht.</p>        
       </div>
       <div class="form-group">
