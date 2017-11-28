@@ -125,5 +125,21 @@ router.get('/API/threadById', function (req, res, next) {
   })
 })
 
+router.post('/API/newPost',function(req,res,err){
+  User.findOne({username: req.body.poster}).exec(function(next, poster){
+    if(next){return next(next)}
+    let post = new Post({content: req.body.content, poster: poster._id, time: Date.now()})
+    post.save(function(e, saved){
+      if(e){return next(e);}
+      Thread.update({_id: mongoose.Types.ObjectId(req.body.threadid)},{$push:{posts:saved}, $set: {lastPostTime: Date.now(), lastPoster: poster._id}}, function(ex, newT){
+        if(ex){return next(e);}
+        Post.populate(saved, {path: 'poster'}, function(error, populatedPost){
+          if(error){return next(error)}
+          res.json(saved);          
+        })
+      })
+    })
+  })
+})
 
 module.exports = router;

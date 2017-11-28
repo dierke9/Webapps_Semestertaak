@@ -22,9 +22,10 @@ export class AuthenticationService {
   login(username: string, password: string){
     return this.http.post(`${this._url}/login`, {username: username, password: password})
       .map(res => res.json()).map(res=>{
+        const id = res._id;
         const token = res.token;
         if(token){
-          localStorage.setItem('currentuser',JSON.stringify({username: username, token: token}));
+          localStorage.setItem('currentuser',JSON.stringify({username: username, token: token, id: id}));
           this._user$.next(username);
           return true;
         }else{
@@ -37,8 +38,9 @@ export class AuthenticationService {
     return this.http.post(`${this._url}/register`,{username: username, password: password})
       .map(res => res.json()).map(res => {
         const token = res.token;
+        const id = res._id;
         if(token){
-          localStorage.setItem('currentuser',JSON.stringify({username: username, token: token}));
+          localStorage.setItem('currentuser',JSON.stringify({username: username, token: token, id: id}));
           this._user$.next(username);
           return true;
         }else{

@@ -29,7 +29,8 @@ export class Thread{
             posts.push(p);
         }
         var t = new Thread(json.title);
-        t._posts = posts;
+        t.posts = posts;
+        t.id = json._id;
         return t;
     }
 
