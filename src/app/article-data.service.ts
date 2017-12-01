@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ArticleDataService {
 
-  private _appUrl = "http://localhost:4200/API/articles";
+  private _appUrl = "API/articles";
 
   constructor(private http: Http) { }
 

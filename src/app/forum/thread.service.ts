@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ThreadService {
 
-  private _appUrl = 'http://localhost:4200/API';
+  private _appUrl = 'API';
   
   constructor(private http: Http) { }
 

@@ -9,7 +9,7 @@ import { Headers } from '@angular/http';
 @Injectable()
 export class SubCategoryService {
 
-  private _appUrl = 'http://localhost:4200/API';
+  private _appUrl = 'API';
   
   constructor(private http: Http) { }
 
