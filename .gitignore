@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 /forumbackend/node_modules
 /forumbackend/.env
+.env

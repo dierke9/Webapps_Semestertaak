@@ -1,15 +1,65 @@
-const express = require('express');
-const http = require('http');
-const path = require('path');
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+let mongoose = require('mongoose');
+let passport = require('passport');
+require('./forumBackend/models/User');
+require('./forumBackend/models/Article');
+require('./forumBackend/models/Post');
+require('./forumBackend/models/Thread');
+require('./forumBackend/models/SubCategory');
+require('./forumBackend/models/Category');
+require('./forumBackend/config/passport');
+//mongodb://<dbuser>:<dbpassword>@ds127126.mlab.com:27126/forumdb
+mongoose.connect('mongodb://localhost/forum', {  useMongoClient: true });
 
-const app = express();
+var index = require('./forumBackend/routes/index');
+var users = require('./forumBackend/routes/users');
 
-app.use(express.static(path.join(__dirname,'dist')));
+var app = express();
 
-app.get('*', (req,res) => res.sendFile(path.join(__dirname, 'dist/index.html')));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-const port = process.env.PORT ||'3001';
-app.set('port',port);
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(passport.initialize());
 
-const server = http.createServer(app);
-server.listen(port, () => console.log('Running'));
+app.use('/', index);
+app.use('/API/users', users);
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.all('*',(req,res) => {
+    const indexFile = `${path.join(__dirname, 'dist')}/index.html`;
+    res.status(200).sendFile(indexFile);
+})
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
