@@ -43,4 +43,16 @@ router.post('/checkusername',function(req,res,next){
   })
 })
 
+router.post("/saveSettings",function(req, res, next){
+  User.findOne({username: req.body.username},function(err, user){
+    console.log(user)
+    if(err){return next(err)}
+    user.bio = req.body.bio;
+    user.interests = req.body.interests;
+    user.save(function(err, result){
+      res.json(result);
+    })
+  })
+})
+
 module.exports = router;

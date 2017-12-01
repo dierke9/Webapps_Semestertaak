@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { User } from './User.model';
 
 @Injectable()
 export class AuthenticationService {
@@ -62,4 +63,7 @@ export class AuthenticationService {
     return this.http.post(`${this._url}/checkusername`,{username: username}).map(res => res.json()).map(item => item.username!='alreadyexists');
   }
 
+  saveSettings(bio: string, interests: string[]): Observable<string>{
+    return this.http.post(`${this._url}/saveSettings`, {username: this.user$.value, bio: bio, interests: interests}).map(responce => responce.json());
+  }
 }

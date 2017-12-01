@@ -1,0 +1,16 @@
+<p>
+  settings works!
+</p>
+<form [formGroup]="settings" (ngSubmit)="onSave()">
+  <div class="form-group">
+      <label for="username">Bio: </label>
+      <input placeholder="Username" type="text" id='username' formControlName="bio" class="form-control"/>
+  </div>
+  <div formArrayName='interests' *ngFor='let item of settings.get("interests").controls; let i = index'>
+    <div [formGroupName]='i' class="form-group">
+      <label for="interest">Interest:</label>
+      <input type="text" formControlName='interest' class="form-control">
+    </div>
+  </div>
+  <button class="btn">Submit</button>
+</form>
