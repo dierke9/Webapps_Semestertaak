@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Category } from "./category.model"
+import { Category } from "./Category.model"
 import 'rxjs/add/operator/map';
 import { SubCategory } from './SubCategory.model';
 import { Headers } from '@angular/http';
