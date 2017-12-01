@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 let passport = require('passport');
+let env = require('env2')('.env');
 require('./forumBackend/models/User');
 require('./forumBackend/models/Article');
 require('./forumBackend/models/Post');
@@ -14,7 +15,7 @@ require('./forumBackend/models/SubCategory');
 require('./forumBackend/models/Category');
 require('./forumBackend/config/passport');
 //mongodb://<dbuser>:<dbpassword>@ds127126.mlab.com:27126/forumdb
-mongoose.connect('mongodb://localhost/forum', {  useMongoClient: true });
+mongoose.connect(process.env.DATABASE, {  useMongoClient: true });
 
 var index = require('./forumBackend/routes/index');
 var users = require('./forumBackend/routes/users');
@@ -35,7 +36,7 @@ app.use(passport.initialize());
 
 app.use('/', index);
 app.use('/API/users', users);
-
+console.log(path.join(__dirname, 'dist'))
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.all('*',(req,res) => {

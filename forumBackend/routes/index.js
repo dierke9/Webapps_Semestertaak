@@ -11,11 +11,6 @@ let jwt = require('express-jwt');
 
 let auth = jwt({ secret: process.env.SECRET, userProperty: 'payload' });
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 router.get('/API/articles/', function (req, res, next) {
   Article.find({}).populate('poster').exec(function (err, recipes) {
     if (err) { return next(err); }
