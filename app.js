@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -36,7 +37,6 @@ app.use(passport.initialize());
 
 app.use('/', index);
 app.use('/API/users', users);
-console.log(path.join(__dirname, 'dist'))
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.all('*',(req,res) => {
@@ -62,5 +62,15 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const port = process.env.PORT || 3000;
+app.set("port",port);
+var server = http.createServer(app);
+server.listen(port);
+server.on('listening', onListening);
+
+function onListening(){
+  console.log("Listening");
+}
 
 module.exports = app;

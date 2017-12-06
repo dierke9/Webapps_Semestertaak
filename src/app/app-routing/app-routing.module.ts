@@ -12,7 +12,6 @@ const approutes: Routes = [
   { path: 'home', component: HomeComponent },
   // {path: 'categories', component: CategoriesComponent},
   // { path: 'login', component: LoginRegisterComponent },
-  
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ]

@@ -6,10 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ArticleComponent } from './article/article.component';
 import { HeaderComponent } from './header/header.component';
-import {AppRoutingModule} from './app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { UserModule } from './user/user.module';
 import { ForumModule } from './forum/forum.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from './user/authentication.service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers:[AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

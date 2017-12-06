@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   selector: 'app-login-register',
   templateUrl: './login-register.component.html',
   styleUrls: ['./login-register.component.css'],
-  providers: [AuthenticationService]
 })
 export class LoginRegisterComponent implements OnInit {
   login: FormGroup;
@@ -18,31 +17,41 @@ export class LoginRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.login = this.fb.group({
-      loginusername: this.fb.control('',[Validators.required]),
-      loginpassword: this.fb.control('',[Validators.required])
+      loginusername: this.fb.control('', [Validators.required]),
+      loginpassword: this.fb.control('', [Validators.required])
     });
     this.register = this.fb.group({
-      username: ['',[Validators.required],this.checkUniqueUsername()],
-      email: this.fb.control('',[Validators.required, Validators.email]),
-      password: this.fb.control('',[Validators.required, Validators.minLength(6)]),
-      repeatPassword: this.fb.control('',[Validators.required]) 
-    }, {validator: testEqual()})
+      username: ['', [Validators.required], this.checkUniqueUsername()],
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      password: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+      repeatPassword: this.fb.control('', [Validators.required])
+    }, { validator: testEqual() });
   }
 
-  onLogin(){
-    this.service.login(this.login.value.loginusername, this.login.value.loginpassword).subscribe(val => {if(val){console.log(this.login.value);this.router.navigate(['home'])}})
-    console.log(this.login.value);
+  onLogin() {
+    this.service.login(this.login.value.loginusername, this.login.value.loginpassword)
+      .subscribe(val => {
+        if (val) {
+          if (this.service.redirectURL) {
+            this.router.navigateByUrl(this.service.redirectURL);
+            this.service.redirectURL = undefined;
+          } else {
+            this.router.navigate(['home']);
+          }
+        }
+      });
   }
 
-  onRegister(){
-    this.service.register(this.register.value.username, this.register.value.password).subscribe(val => {if(val){console.log(this.register.value);}})
+  onRegister() {
+    this.service.register(this.register.value.username, this.register.value.password)
+      .subscribe(val => { if (val) { console.log(this.register.value); } });
   }
 
-  checkUniqueUsername() : ValidatorFn {
-    return (control : AbstractControl):
-      Observable<{[key: string]:any }> => {
-        return this.service.checkUniqueUsername(control.value).map(availdable => availdable?null:{usernameExists: true});
-      }
+  checkUniqueUsername(): ValidatorFn {
+    return (control: AbstractControl):
+      Observable<{ [key: string]: any }> => {
+      return this.service.checkUniqueUsername(control.value).map(availdable => availdable ? null : { usernameExists: true });
+    }
   }
 
 }
@@ -50,10 +59,10 @@ export class LoginRegisterComponent implements OnInit {
 
 
 function testEqual(): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
-    let pwd= control.get('password');
+  return (control: AbstractControl): { [key: string]: any } => {
+    let pwd = control.get('password');
     let repeat = control.get('repeatPassword');
-    const equal = pwd.value != repeat.value && pwd.dirty && repeat.dirty ;
-    return equal ? {'equal': {value: control.value}} : null;
+    const equal = pwd.value != repeat.value && pwd.dirty && repeat.dirty;
+    return equal ? { 'equal': { value: control.value } } : null;
   };
 }

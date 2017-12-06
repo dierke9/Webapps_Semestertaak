@@ -11,12 +11,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThreadComponent } from './thread/thread.component';
 import { ThreadService } from './thread.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthguardService } from '../user/authguard.service';
 
 const routes: Routes = [
-  { path: "forum", component: CategoriesComponent },
-  { path: "category/:id", component: CategoryDetailComponent },
-  { path: "subCategory/:id", component: SubcategoryComponent },
-  { path: "thread/:id", component: ThreadComponent }
+  { path: 'forum', component: CategoriesComponent, canActivate: [AuthguardService] },
+  { path: 'category/:id', component: CategoryDetailComponent, canActivate: [AuthguardService] },
+  { path: 'subCategory/:id', component: SubcategoryComponent, canActivate: [AuthguardService] },
+  { path: 'thread/:id', component: ThreadComponent, canActivate: [AuthguardService] }
 ]
 
 @NgModule({
@@ -36,7 +37,8 @@ const routes: Routes = [
   providers: [
     CategoryDataService,
     SubCategoryService,
-    ThreadService
+    ThreadService,
+    AuthguardService
   ]
 })
 export class ForumModule { }

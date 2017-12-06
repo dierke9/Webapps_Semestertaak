@@ -48,7 +48,8 @@ router.post("/saveSettings",function(req, res, next){
     console.log(user)
     if(err){return next(err)}
     user.bio = req.body.bio;
-    user.interests = req.body.interests;
+    user.birthdate= req.body.birthdate;
+    user.location = req.body.location;
     user.save(function(err, result){
       res.json(result);
     })

@@ -1,15 +1,24 @@
-<p>
-  settings works!
-</p>
+<h1>Settings</h1>
+<h3>Let us know a thing or 2 about you.</h3>
 <form [formGroup]="settings" (ngSubmit)="onSave()">
   <div class="form-group">
       <label for="username">Bio: </label>
-      <input placeholder="Username" type="text" id='username' formControlName="bio" class="form-control"/>
+      <textarea placeholder="Tell us about yourself" formControlName="bio" class="form-control"></textarea>
   </div>
-  <div formArrayName='interests' *ngFor='let item of settings.get("interests").controls; let i = index'>
-    <div [formGroupName]='i' class="form-group">
-      <label for="interest">Interest:</label>
-      <input type="text" formControlName='interest' class="form-control">
+  <div class="row">
+    <div class="col">
+      <label for="location">Location: </label>
+      <input placeholder="Location"  type="text" id="location" formControlName="location" class="form-control">
+    </div>
+    <div class="col">
+      <label for="birthdate">Birthdate: </label>
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="birthdate" ngbDatepicker #d="ngbDatepicker" formControlName="birthdate">
+        <button class="input-group-addon" (click)="d.toggle()" type="button">
+          <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+        </button>
+      </div>
     </div>
   </div>
   <button class="btn">Submit</button>

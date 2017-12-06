@@ -9,7 +9,8 @@ let UserShema = mongoose.Schema({
     hash: String,
     salt: String,
     bio: String,
-    interests: [String]
+    birthdate: String,
+    location: String
 });
 UserShema.methods.setPassword = function(password){
     this.salt = crypto.randomBytes(32).toString('hex');

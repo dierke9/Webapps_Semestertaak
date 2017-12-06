@@ -8,7 +8,7 @@ import { AuthenticationService } from '../user/authentication.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  providers: [CategoryDataService, AuthenticationService]
+  providers: [CategoryDataService]
 })
 export class HeaderComponent implements OnInit {
 
