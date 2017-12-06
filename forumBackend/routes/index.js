@@ -31,15 +31,7 @@ router.get('/API/getAllUsers/', function (req, res, next) {
     res.json(recipes);
   });
 });
-/*
-router.post('/API/users/', function (req, res, next) {
-  let user = new User(req.body);
-  user.save(function(err, rec) {
-    if (err){ return next(err); }
-    res.json(rec);
-  });
-}); 
-*/
+
 router.get('/API/posts/', function (req, res, next) {
   Post.find({}).populate('poster').exec(function (err, recipes) {
     if (err) { return next(err); }
@@ -133,6 +125,24 @@ router.post('/API/newPost',function(req,res,err){
           res.json(saved);          
         })
       })
+    })
+  })
+})
+
+router.post('/API/newCategory', function(req, res, err){
+  let thread = new Category(req.body);
+  thread.save(function (err, rec) {
+    if (err) { return next(err); }
+    res.json(rec);
+  });
+})
+
+router.post('/API/newSubCat', function(req, res, err){
+  let subcat = new SubCategory({title: req.body.title, description: req.body.description});
+  subcat.save(function(e, saved){
+    Category.update({_id: mongoose.Types.ObjectId(req.body.categoryid)}, {$push:{subCats: saved}}, function(error, category){
+      if(error){return next(error)}
+      res.json(saved)
     })
   })
 })

@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add a new subcategory</h4>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addSubcat" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" class="form-control">
+      <p *ngIf="addSubcat.get('title').errors?.required && addSubcat.get('title').touched" class="text-danger">Title has to be filled in</p>
+    </div>
+    <div>
+      <label for="title">Description</label>
+      <input id="description" formControlName="description" class="form-control">
+      <p *ngIf="addSubcat.get('description').errors?.required && addSubcat.get('description').touched" class="text-danger">Description has to be filled in</p>
+      <p *ngIf="addSubcat.get('description').errors?.minlength && addSubcat.get('description').touched" class="text-danger">Description has to be atleast 10 characters long</p>      
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

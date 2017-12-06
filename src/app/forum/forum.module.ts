@@ -12,6 +12,7 @@ import { ThreadComponent } from './thread/thread.component';
 import { ThreadService } from './thread.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthguardService } from '../user/authguard.service';
+import { AddSubcatComponent } from './add-subcat/add-subcat.component';
 
 const routes: Routes = [
   { path: 'forum', component: CategoriesComponent, canActivate: [AuthguardService] },
@@ -32,13 +33,17 @@ const routes: Routes = [
     CategoriesComponent,
     CategoryDetailComponent,
     SubcategoryComponent,
-    ThreadComponent
+    ThreadComponent,
+    AddSubcatComponent
   ],
   providers: [
     CategoryDataService,
     SubCategoryService,
     ThreadService,
     AuthguardService
+  ],
+  entryComponents: [
+    AddSubcatComponent
   ]
 })
 export class ForumModule { }

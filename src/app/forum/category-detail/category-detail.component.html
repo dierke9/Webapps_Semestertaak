@@ -1,4 +1,5 @@
 <div *ngIf='category'>
+  <button class="btn btn-success float-right" (click)='addSubCat()'>Add subcategory</button>    
   <h1>{{category.Title}}</h1>
   <p>{{category.Description}}</p>
   <div *ngFor='let subCat of category.SubCats'>
