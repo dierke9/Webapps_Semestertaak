@@ -12,7 +12,7 @@ let jwt = require('express-jwt');
 let auth = jwt({ secret: process.env.SECRET, userProperty: 'payload' });
 
 router.get('/API/articles/', function (req, res, next) {
-  Article.find({}).populate('poster').exec(function (err, recipes) {
+  Article.find({}).sort({postedAt: -1}).populate('poster').exec(function (err, recipes) {
     if (err) { return next(err); }
     res.json(recipes);
   });
@@ -144,6 +144,26 @@ router.post('/API/newSubCat', function(req, res, err){
       if(error){return next(error)}
       res.json(saved)
     })
+  })
+})
+
+router.post('/API/articles/addArticle', function(req, res, err){
+  let article = new Article({title: req.body.article._title, summary: req.body.article._summary, content: req.body.article._content, image: req.body.article._imageStirng});
+  User.findOne({username: req.body.poster}).exec(function(next, poster){
+    article.poster = poster;
+    article.postedAt = Date.now();
+    article.save(function(e,saved){
+      if(e){return next(e);}
+      res.json(saved);
+    })
+  })
+})
+
+router.get('/API/articles/articleById', function(req, res, err){
+  const id = req.get('id');
+  Article.findById(id).exec(function(err, article){
+    if(err){return nextTick(err);}
+    res.json(article);
   })
 })
 

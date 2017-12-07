@@ -11,12 +11,13 @@ import { UserModule } from './user/user.module';
 import { ForumModule } from './forum/forum.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from './user/authentication.service';
+import { AddArticleComponent } from './home/add-article/add-article.component';
+import { ArticleDataService } from './article-data.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleComponent,
     HeaderComponent
   ],
   imports: [
@@ -28,7 +29,7 @@ import { AuthenticationService } from './user/authentication.service';
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers:[AuthenticationService],
+  providers: [AuthenticationService, ArticleDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

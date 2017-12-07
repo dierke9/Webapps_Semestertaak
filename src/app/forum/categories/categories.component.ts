@@ -20,4 +20,8 @@ export class CategoriesComponent implements OnInit {
       return this._categories;
   }
 
+  addCategory() {
+    console.log('add Category');
+  }
+
 }

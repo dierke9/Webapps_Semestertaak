@@ -9,8 +9,8 @@ import { SubCategory } from '../SubCategory.model';
   styleUrls: ['./subcategory.component.css']
 })
 export class SubcategoryComponent implements OnInit {
-  private _subcat : SubCategory;
-  page: number = 1;
+  private _subcat: SubCategory;
+  page = 1;
 
   constructor(private service: SubCategoryService, private route: ActivatedRoute) { 
     this.route.paramMap.subscribe(pa => this.service.subcatDetail(pa.get('id')).subscribe(data => this._subcat = data));
@@ -28,14 +28,17 @@ export class SubcategoryComponent implements OnInit {
   }
 
   get startThread(){
-    return this.page *10 -10;
+    return this.page * 10 - 10;
   }
   get endThread(){
-    var end = this.page*10;
-    if(end > this.ThreadCount){
+    const end = this.page * 10;
+    if (end > this.ThreadCount) {
       return end;
     }
     return this.ThreadCount;
   }
 
+  newThread() {
+    console.log('New Thread');
+  }
 }

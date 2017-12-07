@@ -15,7 +15,8 @@ let ArticleShema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }
-    }]
+    }],
+    postedAt: Date
 });
 
 mongoose.model('Article', ArticleShema);

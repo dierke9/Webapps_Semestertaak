@@ -6,27 +6,33 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from '../forum/categories/categories.component';
 import { CategoryDetailComponent } from '../forum/category-detail/category-detail.component';
+import { ArticleComponent } from '../article/article.component';
+import { AddArticleComponent } from '../home/add-article/add-article.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const approutes: Routes = [
   { path: 'home', component: HomeComponent },
-  // {path: 'categories', component: CategoriesComponent},
-  // { path: 'login', component: LoginRegisterComponent },
+  { path: 'article/:id', component: ArticleComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
-]
+];
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(approutes)
   ],
   declarations: [
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ArticleComponent,
+    AddArticleComponent
   ],
   exports: [
     RouterModule
-  ]
+  ],
+  entryComponents: [AddArticleComponent]
 })
 export class AppRoutingModule { }

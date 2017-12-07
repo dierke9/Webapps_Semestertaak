@@ -1,4 +1,5 @@
 <div *ngIf="subCategory">
+  <button class="btn btn-success float-right" (click)="newThread()">New Thread</button>
   <h1>{{subCategory.Title}}</h1>
   <p>{{subCategory.Description}}</p>
   <table>

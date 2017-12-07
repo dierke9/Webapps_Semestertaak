@@ -1,4 +1,5 @@
 <div>
+  <button class="btn btn-success float-right" (click)="addCategory()">New category</button>
   <div *ngFor="let category of Categories | async">
     <a routerLink='/category/{{category.id}}' routerLinkActive='active'>
       <h2>{{category.Title}}</h2>
@@ -9,7 +10,7 @@
         <tr *ngFor="let subcat of category.SubCats">
           <td>
             <div>
-              <a routerLink="/subcat/{{subcat.id}}" routerLinkActive="active">
+              <a routerLink="/subCategory/{{subcat.id}}" routerLinkActive="active">
                 <p>{{subcat.Title}}</p>
                 <p>{{subcat.Description}}</p>
               </a>
