@@ -27,16 +27,19 @@ export class SettingsComponent implements OnInit {
       location: this.fb.control('', []),
       birthdate: this.fb.control('', [])
     });
+    this.authservice.getSettings().subscribe(data => {
+      this.settings.get('bio').setValue(data.bio);
+      this.settings.get('location').setValue(data.localtion);
+      const date = data.birthdate.split('-');
+      // tslint:disable-next-line:max-line-length
+      this.settings.get('birthdate').setValue({year: Number.parseInt(date[0]), month: Number.parseInt(date[1]), day: Number.parseInt(date[2])});
+    });
   }
 
   createInterest(): FormGroup {
     return this.fb.group({
       interest: this.fb.control('', [Validators.minLength(5)])
     });
-  }
-
-  get interests(): FormArray {
-    return <FormArray>this.settings.get('interests');
   }
 
   onSave() {

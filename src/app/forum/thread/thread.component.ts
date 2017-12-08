@@ -5,6 +5,8 @@ import { Thread } from '../Thread.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../../user/authentication.service';
 import { Post } from '../Post.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap/modal/modal';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @Component({
   selector: 'app-thread',
@@ -20,7 +22,8 @@ export class ThreadComponent implements OnInit {
   constructor(private serivce: ThreadService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private modalService: NgbModal) {
     this.route.paramMap.subscribe(pa => this.serivce.thread(pa.get('id')).subscribe(data => this._thread = data));
   }
 
@@ -55,6 +58,27 @@ export class ThreadComponent implements OnInit {
           .subscribe(post => this._thread.posts.push(post));
       });
     }
+  }
+
+  get isAdmin() {
+    return this.authService.isAdmin;
+  }
+
+  deletePost(index) {
+    this.serivce.deletePost(this._thread.posts[index].id, this._thread.id)
+    .subscribe(success => {
+      this._thread.posts.splice(index, 1);
+    })
+  }
+
+  editPost(index) {
+    const modal = this.modalService.open(EditPostComponent);
+    modal.componentInstance.post = this._thread.posts[index].content;
+    modal.componentInstance.newPost.subscribe(content => {
+      const post = this._thread.posts[index];
+      post.content = content;
+      this.serivce.editPost(post).subscribe(asnwer => {});
+    })
   }
 
 }

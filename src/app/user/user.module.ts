@@ -8,13 +8,15 @@ import { HttpModule } from '@angular/http';
 import { AuthenticationService } from './authentication.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: 'register', redirectTo: 'login' }
-]
+  { path: 'register', redirectTo: 'login' },
+  { path: 'profile/:username', component: ProfileComponent }
+];
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ const routes: Routes = [
   declarations: [
     LoginRegisterComponent,
     LogoutComponent,
-    SettingsComponent
+    SettingsComponent,
+    ProfileComponent
   ]
 })
 export class UserModule { }

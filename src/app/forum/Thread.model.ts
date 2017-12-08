@@ -1,7 +1,7 @@
 import { User } from "../user/User.model";
 import { Post } from "./Post.model";
 
-export class Thread{
+export class Thread {
     private _id: string;
     private _title: string;
     private _creator: User;
@@ -9,10 +9,10 @@ export class Thread{
     private _lastPostTime: Date;
     private _posts: Post[];
 
-    static fromJSON(json){
+    static fromJSON(json) {
         const creator = User.fromJSON(json.creator);
         const lastPost = User.fromJSON(json.lastPoster);
-        var t = new Thread(json.title);
+        const t = new Thread(json.title);
         t.id = json._id;
         t.creator = creator;
         t.lastPost = lastPost;
@@ -20,61 +20,61 @@ export class Thread{
         return t;
     }
 
-    static fromJsonWithPosts(json){
-        var posts = [];
-        for(var post of json.posts){
-            var poster = User.fromJSON(post.poster)
-            var p = new Post(post.content, poster, post.time);
+    static fromJsonWithPosts(json) {
+        const posts = [];
+        for (const post of json.posts) {
+            const poster = User.fromJSON(post.poster)
+            const p = new Post(post.content, poster, post.time);
             p.id = post._id;
             posts.push(p);
         }
-        var t = new Thread(json.title);
+        const t = new Thread(json.title);
         t.posts = posts;
         t.id = json._id;
         return t;
     }
 
-    constructor(titel: string){
+    constructor(titel: string) {
         this._title = titel;
     }
 
-    get title(){
+    get title() {
         return this._title;
     }
-    set title(title:string){
+    set title(title: string) {
         this._title = title;
     }
 
-    get creator(){
+    get creator() {
         return this._creator;
     }
-    set creator(creator:User){
+    set creator(creator: User) {
         this._creator = creator;
     }
 
-    get lastPost(){
+    get lastPost() {
         return this._lastPost;
     }
-    set lastPost(lastPost:User){
+    set lastPost(lastPost: User) {
         this._lastPost = lastPost;
     }
-    get lastPostTime(){
+    get lastPostTime() {
         return this._lastPostTime;
     }
-    set lastPostTime(lastPostTime: Date){
-        this._lastPostTime= lastPostTime;
+    set lastPostTime(lastPostTime: Date) {
+        this._lastPostTime = lastPostTime;
     }
-    get id(){
+    get id() {
         return this._id;
     }
-    set id(id: string){
+    set id(id: string) {
         this._id = id;
     }
 
-    get posts(){
+    get posts() {
         return this._posts;
     }
-    set posts(posts: Post[]){
+    set posts(posts: Post[]) {
         this._posts = posts;
     }
 }

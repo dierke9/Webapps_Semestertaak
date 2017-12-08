@@ -1,4 +1,4 @@
-import { User } from "../user/User.model";
+import { User } from '../user/User.model';
 
 export class Post{
     private _id: string;
@@ -6,7 +6,12 @@ export class Post{
     private _time: Date;
     private _content: string;
 
-    constructor(content: string, poster: User, time: Date){
+    static fromJSON(json) {
+        const user = User.fromJSON(json.poster);
+        return new Post(json.content, user, json.time);
+    }
+
+    constructor(content: string, poster: User, time: Date) {
         this._content = content;
         this._poster = poster;
         this._time = time;

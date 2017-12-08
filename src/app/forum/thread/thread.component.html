@@ -1,9 +1,6 @@
-<p>
-  thread works!
-</p>
 <div *ngIf="Thread">
   <h2>{{Thread.title}}</h2>
-  <div *ngFor="let post of Thread.posts | slice:start:end" class="card text-white bg-dark">
+  <div *ngFor="let post of Thread.posts | slice:start:end;index as i" class="card text-white bg-dark">
     <div class="card-header">
       <p>{{post.time}}</p>
     </div>
@@ -12,7 +9,13 @@
         <b>{{post.poster.username}}</b>
       </div>
       <div class="w-75">
+        <div>
       <p class="card-text">{{post.content}}</p>
+      </div>
+      <div *ngIf="isAdmin">
+        <img src="../../../assets/delete.png" (click)="deletePost(i)" class="icon">
+        <img src="../../../assets/edit.png" (click)="editPost(i)" class="icon">
+      </div>
       </div>
     </div>
   </div>

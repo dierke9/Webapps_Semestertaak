@@ -55,6 +55,13 @@ router.post("/saveSettings",function(req, res, next){
   })
 })
 
+router.get("/settings",function(req,res,next){
+  User.findOne({username: req.get('username')},function(err, user){
+    if(err){return next(err)}
+    res.json({bio: user.bio, location: user.location, birthdate: user.birthdate})
+  })
+})
+
 router.get('/getAdmin', function(req, res, next){
   const username = req.get('username');
   User.findOne({username: username}, function(err, user){
@@ -63,6 +70,13 @@ router.get('/getAdmin', function(req, res, next){
     }else{
       res.json("user")
     }
+  })
+})
+
+router.get('/userByName', function(req,res,next){
+  User.findOne({username: req.get('username')}, function(err, user){
+    if(err){return next(err)};
+    res.json(user);
   })
 })
 

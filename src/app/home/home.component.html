@@ -8,7 +8,7 @@
         <a routerLink="/article/{{article.id}}" routerLinkActive="active">
         <h4 class="card-title main-article">{{article.Title}}</h4></a>
         <p class="card-text">{{article.Summary}}</p>
-        <p class="card-text"><small class="text-muted">Created by {{article.Poster.username}}</small></p>
+        <p class="card-text"><small class="text-muted">Created by <a routerLink="/profile/{{article.Poster.username}}" routerLinkActive='active'>{{article.Poster.username}}</a></small></p>
       </div>
   </div>
 </div> 

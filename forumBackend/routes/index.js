@@ -112,7 +112,7 @@ router.get('/API/threadById', function (req, res, next) {
   })
 })
 
-router.post('/API/newPost', function (req, res, err) {
+router.post('/API/newPost', function (req, res, next) {
   User.findOne({ username: req.body.poster }).exec(function (next, poster) {
     if (next) { return next(next) }
     let post = new Post({ content: req.body.content, poster: poster._id, time: Date.now() })
@@ -129,7 +129,7 @@ router.post('/API/newPost', function (req, res, err) {
   })
 })
 
-router.post('/API/newCategory', function (req, res, err) {
+router.post('/API/newCategory', function (req, res, next) {
   let thread = new Category(req.body);
   thread.save(function (err, rec) {
     if (err) { return next(err); }
@@ -137,7 +137,7 @@ router.post('/API/newCategory', function (req, res, err) {
   });
 })
 
-router.post('/API/newSubCat', function (req, res, err) {
+router.post('/API/newSubCat', function (req, res, next) {
   let subcat = new SubCategory({ title: req.body.title, description: req.body.description });
   subcat.save(function (e, saved) {
     Category.update({ _id: mongoose.Types.ObjectId(req.body.categoryid) }, { $push: { subCats: saved } }, function (error, category) {
@@ -147,7 +147,7 @@ router.post('/API/newSubCat', function (req, res, err) {
   })
 })
 
-router.post('/API/articles/addArticle', function (req, res, err) {
+router.post('/API/articles/addArticle', function (req, res, next) {
   let article = new Article({ title: req.body.article._title, summary: req.body.article._summary, content: req.body.article._content, image: req.body.article._imageStirng });
   User.findOne({ username: req.body.poster }).exec(function (next, poster) {
     article.poster = poster;
@@ -159,7 +159,7 @@ router.post('/API/articles/addArticle', function (req, res, err) {
   })
 })
 
-router.get('/API/articles/articleById', function (req, res, err) {
+router.get('/API/articles/articleById', function (req, res, next) {
   const id = req.get('id');
   Article.findById(id).populate('comments.poster').exec(function (err, article) {
     console.log(article);
@@ -168,7 +168,7 @@ router.get('/API/articles/articleById', function (req, res, err) {
   })
 })
 
-router.post('/API/addThread', function (req, res, err) {
+router.post('/API/addThread', function (req, res, next) {
   User.findOne({ username: req.body.poster }).exec(function (e, user) {
     if (e) { return next(e); }
     const post = new Post({ time: Date.now(), content: req.body.post, poster: user._id })
@@ -190,7 +190,7 @@ router.post('/API/addThread', function (req, res, err) {
   })
 })
 
-router.post('/API/articles/addComment', function(req,res,err){
+router.post('/API/articles/addComment', function(req,res,next){
   Article.findById(req.body.articleId).exec(function (e, article){
     User.findOne({username: req.body.user}).exec(function(err, user){
       const comment = {text: req.body.comment, poster: user._id};
@@ -198,6 +198,25 @@ router.post('/API/articles/addComment', function(req,res,err){
       article.save(function(error, savedArticle){
         res.json({text: comment.text, poster: user});
       })
+    })
+  })
+})
+
+router.delete('/API/deletePost', function(req,res,next){
+  Post.remove({_id: mongoose.Types.ObjectId(req.get('postId'))}).exec(function(err){
+    if(err){return next(err)}
+    Thread.update({_id: mongoose.Types.ObjectId(req.get('threadId'))}, {$pull: {posts: {_id: mongoose.Types.ObjectId(req.get('postId'))}}}).exec(function(err){
+      if(err){return next(err);}
+      res.json("success");
+    })
+  })
+})
+
+router.put('/API/editPost', function(req,res,next){
+  Post.update({_id: mongoose.Types.ObjectId(req.body.post._id)}, {content: req.body.post._content}).exec(function(err, newPost){
+    if(err){return next(err)}
+    Post.populate(newPost, {path: "poster"},function(e, popPost){
+      res.json(newPost);      
     })
   })
 })

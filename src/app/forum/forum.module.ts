@@ -15,6 +15,7 @@ import { AuthguardService } from '../user/authguard.service';
 import { AddSubcatComponent } from './add-subcat/add-subcat.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddThreadComponent } from './add-thread/add-thread.component';
+import { EditPostComponent } from './thread/edit-post/edit-post.component';
 
 const routes: Routes = [
   { path: 'forum', component: CategoriesComponent, canActivate: [AuthguardService] },
@@ -38,7 +39,8 @@ const routes: Routes = [
     ThreadComponent,
     AddSubcatComponent,
     AddCategoryComponent,
-    AddThreadComponent
+    AddThreadComponent,
+    EditPostComponent
   ],
   providers: [
     CategoryDataService,
@@ -49,7 +51,8 @@ const routes: Routes = [
   entryComponents: [
     AddSubcatComponent,
     AddCategoryComponent,
-    AddThreadComponent
+    AddThreadComponent,
+    EditPostComponent
   ]
 })
 export class ForumModule { }

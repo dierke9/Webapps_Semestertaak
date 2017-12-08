@@ -88,6 +88,20 @@ export class AuthenticationService {
       .map(responce => responce.json());
   }
 
+  getSettings() {
+    const headers = new Headers();
+    headers.append('username', this._user$.getValue());
+    return this.http.get(`${this._url}/settings`, { headers: headers }).map(response => response.json())
+      .map(item => ({ bio: item.bio, localtion: item.location, birthdate: item.birthdate }))
+  }
+
+  getUser(username: string) {
+    const headers = new Headers();
+    headers.append('username', username);
+    return this.http.get(`${this._url}/userByName`, { headers: headers }).map(response => response.json())
+    .map(data => User.fromJSON(data));
+  }
+
   get redirectURL() {
     return this._redirect;
   }
