@@ -1,7 +1,7 @@
 <div class="main">
-  <button class="btn btn-success float-right" (click)='addArticle()'>New article</button>
+  <button *ngIf="isAdmin" class="btn btn-success float-right" (click)='addArticle()'>New article</button>
   <h1>Articles</h1>
-  <div class="card main-article text-center" *ngFor="let article of articles;let i = index">
+  <div class="card main-article text-center bg-dark text-white" *ngFor="let article of articles;let i = index">
     <a routerLink="/article/{{article.id}}" routerLinkActive="active">  
     <img class="card-img-top img-main" [src]="articleImage(i)" /></a>
       <div class="card-body">

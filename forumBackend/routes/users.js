@@ -55,4 +55,15 @@ router.post("/saveSettings",function(req, res, next){
   })
 })
 
+router.get('/getAdmin', function(req, res, next){
+  const username = req.get('username');
+  User.findOne({username: username}, function(err, user){
+    if(user.admin){
+      res.json("admin")
+    }else{
+      res.json("user")
+    }
+  })
+})
+
 module.exports = router;

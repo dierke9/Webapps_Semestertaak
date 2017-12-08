@@ -5,6 +5,7 @@ import { Category } from './Category.model';
 import 'rxjs/add/operator/map';
 import { SubCategory } from './SubCategory.model';
 import { Headers } from '@angular/http';
+import { Thread } from './Thread.model';
 
 @Injectable()
 export class SubCategoryService {
@@ -17,7 +18,7 @@ export class SubCategoryService {
     const header = new Headers();
     header.set('id', id);
     return this.http.get(`${this._appUrl}/categoryDetail`, { headers: header }).map(response =>
-      response.json()).map(item => Category.fromJSONWithSubcats(item))
+      response.json()).map(item => Category.fromJSONWithSubcats(item));
   }
 
   subcatDetail(id: string): Observable<SubCategory> {
@@ -28,8 +29,13 @@ export class SubCategoryService {
   }
 
   addSubcat(subcat: SubCategory, categoryid: string): Observable<SubCategory> {
-    return this.http.post(`${this._appUrl}/newSubCat`, {title: subcat.Title, description: subcat.Description, categoryid: categoryid})
-    .map(response =>
-      response.json()).map(item => SubCategory.fromJSON(item));
+    return this.http.post(`${this._appUrl}/newSubCat`, { title: subcat.Title, description: subcat.Description, categoryid: categoryid })
+      .map(response =>
+        response.json()).map(item => SubCategory.fromJSON(item));
+  }
+
+  addThread(title: string, post: string, subcatId: string, poster: string) {
+    return this.http.post(`${this._appUrl}/addThread`, { title: title, post: post, subcatId: subcatId, poster: poster }).map(responce =>
+      responce.json()).map(item => Thread.fromJSON(item));
   }
 }

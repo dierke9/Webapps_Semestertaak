@@ -12,29 +12,29 @@ import { AuthenticationService } from '../user/authentication.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private _imgURL: String = "../../assets/logo.jpg";
+  private _imgURL: String = '../../assets/logo.jpg';
   private _categories;
 
-  constructor(private categoryDataService: CategoryDataService, private auth: AuthenticationService) { 
+  constructor(private categoryDataService: CategoryDataService, private auth: AuthenticationService) {
     this._categories = categoryDataService.categories;
   }
 
   ngOnInit() {
   }
 
-  get ImgURL():String{
+  get ImgURL(): String {
     return this._imgURL;
   }
 
-  get Categories(){
+  get Categories() {
     return this._categories;
   }
 
-  get currentuser(){
+  get currentuser() {
     return this.auth.user$;
   }
 
-  logout(){
+  logout() {
     this.auth.logout();
   }
 

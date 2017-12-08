@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h3 class="modal-title">Create a new category</h3>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addCategory" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" formControlName="title" class="form-control">
+      <p class="text-danger" *ngIf="addCategory.get('title').errors?.required && addCategory.get('title').touched">Title has to be filled in</p>
+    </div>
+    <div class="form-group">
+      <label for="descrption">Description</label>
+      <input type="text" id="description" formControlName="description" class="form-control">
+      <p class="text-danger" *ngIf="addCategory.get('description').errors?.required && addCategory.get('description').touched">Description has to be filled in</p>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+  </form>
+</div>

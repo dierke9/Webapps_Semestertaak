@@ -3,4 +3,21 @@
   <h1>{{article.Title}}</h1>
   <b>{{article.Summary}}</b>
   <p>{{article.Content}}</p>
+  <table class="table table-dark">
+    <tbody>
+      <tr *ngFor="let comment of article.comments"> 
+        <td>{{comment.user.username}}</td>
+        <td>{{comment.content}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form [formGroup]='newComment' (ngSubmit)='onSubmit()' *ngIf="(loggedIn | async) else login">
+    <input type="text" class="form-control" formControlName="comment">
+    <button class="btn btn-primary">Submit</button>
+  </form>
+  <ng-template #login>
+    <div>
+      <p>You need to be logged in to comment. <a routerLink="/login" routerLinkActive="active">Log in or register here</a></p>
+    </div>
+  </ng-template>
 </div>

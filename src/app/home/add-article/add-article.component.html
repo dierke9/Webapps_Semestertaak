@@ -6,18 +6,23 @@
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" id="title" formControlName="title" class="form-control">
+      <p class="text-danger" *ngIf="newArticle.get('title').errors?.required && newArticle.get('title').touched">Title has to be filled in</p>
     </div>
     <div class="form-group">
       <label for="summary">Summary</label>
       <textarea id="summary" formControlName="summary" class="form-control"></textarea>
+      <p class="text-danger" *ngIf="newArticle.get('summary').errors?.required && newArticle.get('summary').touched">Summary has to be filled in</p>      
+      <p class="text-danger" *ngIf="newArticle.get('summary').errors?.maxlength">Summary has to be less then 150 characters</p> 
     </div>
     <div class="form-group">
       <label for="content">Content</label>
       <textarea id="content" formControlName="content" class="form-control"></textarea>
+      <p class="text-danger" *ngIf="newArticle.get('content').errors?.required && newArticle.get('content').touched">Content has to be filled in</p>      
     </div>
     <div class="form-group">
       <label for="picture">Picture</label>
-      <input type="file" formControlName="picture" class="form-control-file" (change)="handleFileSelect($event)">
+      <input type="file" class="form-control-file" (change)="handleFileSelect($event)">
+      <p *ngIf="noFile" class="text-danger">No image chosen</p>
     </div>
     <button class="btn btn-primary">Submit</button>
   </form>

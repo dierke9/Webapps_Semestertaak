@@ -61,4 +61,8 @@ export class HomeComponent implements OnInit {
     return this._articles[index].image;
   }
 
+  get isAdmin(){
+    return this.authService.isAdmin;
+  }
+
 }

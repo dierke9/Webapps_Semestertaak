@@ -1,6 +1,6 @@
 <div>
-  <button class="btn btn-success float-right" (click)="addCategory()">New category</button>
-  <div *ngFor="let category of Categories | async">
+  <button *ngIf="isAdmin" class="btn btn-success float-right" (click)="addCategory()">New category</button>
+  <div *ngFor="let category of Categories">
     <a routerLink='/category/{{category.id}}' routerLinkActive='active'>
       <h2>{{category.Title}}</h2>
       <p>{{category.Description}}</p>

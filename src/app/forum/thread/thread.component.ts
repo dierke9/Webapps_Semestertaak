@@ -45,12 +45,16 @@ export class ThreadComponent implements OnInit {
   }
 
   onNewPost() {
-    const content = this.newpost.get('post').value;
-    let username;
-    console.log(this._thread);
-    const threadid = this._thread.id;
-    this.authService.user$.subscribe(data => { username = data; this.serivce.savePost(content, username, threadid)
-      .subscribe(post => this._thread.posts.push(post)); });
+    if (this.newpost.valid) {
+      const content = this.newpost.get('post').value;
+      let username;
+      console.log(this._thread);
+      const threadid = this._thread.id;
+      this.authService.user$.subscribe(data => {
+        username = data; this.serivce.savePost(content, username, threadid)
+          .subscribe(post => this._thread.posts.push(post));
+      });
+    }
   }
 
 }

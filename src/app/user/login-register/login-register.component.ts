@@ -43,8 +43,10 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   onRegister() {
-    this.service.register(this.register.value.username, this.register.value.password)
-      .subscribe(val => { if (val) { console.log(this.register.value); } });
+    if (this.register.valid) {
+      this.service.register(this.register.value.username, this.register.value.password)
+        .subscribe(val => { if (val) { console.log(this.register.value); } });
+    }
   }
 
   checkUniqueUsername(): ValidatorFn {
@@ -60,9 +62,9 @@ export class LoginRegisterComponent implements OnInit {
 
 function testEqual(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
-    let pwd = control.get('password');
-    let repeat = control.get('repeatPassword');
-    const equal = pwd.value != repeat.value && pwd.dirty && repeat.dirty;
+    const pwd = control.get('password');
+    const repeat = control.get('repeatPassword');
+    const equal = pwd.value !== repeat.value && pwd.dirty && repeat.dirty;
     return equal ? { 'equal': { value: control.value } } : null;
   };
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryDataService } from '../category-data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddCategoryComponent } from '../add-category/add-category.component';
+import { Category } from '../Category.model';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-categories',
@@ -7,10 +11,10 @@ import { CategoryDataService } from '../category-data.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  private _categories;
+  private _categories: Category[];
 
-  constructor(private service: CategoryDataService) { 
-    this._categories = this.service.categories;
+  constructor(private service: CategoryDataService, private modalSerive: NgbModal, private authService: AuthenticationService) {
+    this.service.categories.subscribe(data => this._categories = data);
   }
 
   ngOnInit() {
@@ -22,6 +26,13 @@ export class CategoriesComponent implements OnInit {
 
   addCategory() {
     console.log('add Category');
+    const modal = this.modalSerive.open(AddCategoryComponent);
+    modal.componentInstance.newCategory
+    .subscribe(category => this.service.saveCategory(category).subscribe(cat => this._categories.push(cat)));
+  }
+
+  get isAdmin(){
+    return this.authService.isAdmin;
   }
 
 }

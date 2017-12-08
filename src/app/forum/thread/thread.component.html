@@ -19,7 +19,7 @@
   <div>
     <form [formGroup]='newpost' (ngSubmit)='onNewPost()'>
       <textarea class="w-100 form-control" formControlName="post"></textarea>
-      <p *ngIf="newpost.get('post').errors?.minlength" class=".text-danger">A post has to be atleast 10 characters</p>
+      <p *ngIf="newpost.get('post').errors?.minlength" class="text-danger">A post has to be atleast 10 characters</p>
       <button class="btn">Submit</button>
     </form>
   </div>

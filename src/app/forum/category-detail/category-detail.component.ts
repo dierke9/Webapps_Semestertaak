@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Category } from '../Category.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddSubcatComponent } from '../add-subcat/add-subcat.component';
+import { AuthenticationService } from '../../user/authentication.service';
 
 @Component({
   selector: 'app-category-detail',
@@ -13,7 +14,8 @@ import { AddSubcatComponent } from '../add-subcat/add-subcat.component';
 export class CategoryDetailComponent implements OnInit {
   private _category: Category;
 
-  constructor(private service: SubCategoryService, private route: ActivatedRoute, private modalSerive: NgbModal) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private service: SubCategoryService, private route: ActivatedRoute, private modalSerive: NgbModal, private authService: AuthenticationService) {
     this.route.paramMap.subscribe(pa => this.service.subCategories(pa.get('id')).subscribe(data => this._category = data));
    }
 
@@ -29,6 +31,10 @@ export class CategoryDetailComponent implements OnInit {
     modal.componentInstance.newSubcat
     .subscribe(subcat => this.service.addSubcat(subcat, this._category.id)
     .subscribe(returnedSubcat => this._category.SubCats.push(returnedSubcat)));
+  }
+
+  get isAdmin(){
+    return this.authService.isAdmin;
   }
 
 }

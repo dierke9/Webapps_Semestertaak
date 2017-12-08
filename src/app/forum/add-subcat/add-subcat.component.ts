@@ -22,9 +22,11 @@ export class AddSubcatComponent implements OnInit {
   }
 
   onSubmit() {
-    const subCat = new SubCategory(this.addSubcat.get('title').value, this.addSubcat.get('description').value);
-    this.newSubcat.next(subCat);
-    this.activeModal.dismiss();
+    if (this.addSubcat.valid) {
+      const subCat = new SubCategory(this.addSubcat.get('title').value, this.addSubcat.get('description').value);
+      this.newSubcat.next(subCat);
+      this.activeModal.dismiss();
+    }
   }
 
 }

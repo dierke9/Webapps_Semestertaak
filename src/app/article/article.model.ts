@@ -1,4 +1,5 @@
 import { User } from '../user/User.model';
+import { Comment } from './comment.model';
 
 export class Article {
     private _title: string;
@@ -7,12 +8,23 @@ export class Article {
     private _user: User;
     private _summary: string;
     private _id: string;
+    private _comments: Comment[] = [];
 
     static fromJSON(json): Article {
         const article = new Article(json.title, json.content, json.image, json.summary);
         const user = User.fromJSON(json.poster);
         article.Poster = user;
         article.id = json._id;
+        return article;
+    }
+
+    static fromJSONWithComment(json): Article {
+        const article = Article.fromJSON(json);
+        const comments = [];
+        for (const comment of json.comments) {
+            comments.push(Comment.fromJSON(comment));
+        }
+        article.comments = comments;
         return article;
     }
 
@@ -23,34 +35,34 @@ export class Article {
         this._summary = summary;
     }
 
-    get Title(): string{
+    get Title(): string {
         return this._title;
     }
-    set Title(title: string){
+    set Title(title: string) {
         this._title = title;
     }
 
-    get Content(): string{
+    get Content(): string {
         return this._content;
     }
 
-    set Content(desc: string){
+    set Content(desc: string) {
         this._content = desc;
     }
 
-    get image(): string{
+    get image(): string {
         return 'data:image/png;base64,' + this._imageStirng;
     }
 
-    get Summary(){
+    get Summary() {
         return this._summary;
     }
 
-    get Poster(){
+    get Poster() {
         return this._user;
     }
 
-    set Poster(poster: User){
+    set Poster(poster: User) {
         this._user = poster;
     }
 
@@ -58,7 +70,15 @@ export class Article {
         this._id = id;
     }
 
-    get id(){
+    get id() {
         return this._id;
+    }
+
+    get comments(){
+        return this._comments;
+    }
+
+    set comments(comments: Comment[]){
+        this._comments = comments;
     }
 }
