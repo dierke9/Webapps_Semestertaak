@@ -1,10 +1,12 @@
-<div>
+<div class="main">
   <button *ngIf="isAdmin" class="btn btn-success float-right" (click)="addCategory()">New category</button>
   <div *ngFor="let category of Categories">
-    <a routerLink='/category/{{category.id}}' routerLinkActive='active'>
-      <h2>{{category.Title}}</h2>
-      <p>{{category.Description}}</p>
-    </a>
+    <div class="header">
+      <a routerLink='/category/{{category.id}}' routerLinkActive='active' class="catA">
+        <h2>{{category.Title}}</h2>
+        <p>{{category.Description}}</p>
+      </a>
+    </div>
     <table class="table table-striped table-dark">
       <tbody>
         <tr *ngFor="let subcat of category.SubCats">
@@ -16,7 +18,6 @@
               </a>
             </div>
           </td>
-          <td></td>
         </tr>
       </tbody>
     </table>

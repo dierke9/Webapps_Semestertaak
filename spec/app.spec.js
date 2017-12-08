@@ -4,7 +4,7 @@ describe("server", () => {
     let server;
     let categoryid;    
     beforeAll(() => {
-        //server = require("../forumBackend/app")
+        server = require("../forumBackend/bin/www")
     })
     describe("POST /API/categories", () => {
         let data = {};

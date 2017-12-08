@@ -8,6 +8,10 @@
     margin-right: 25%;
 }
 
+.navbar{
+    border-radius: 10px;
+}
+
 li.dropdown:hover > .dropdown-menu {
     display: block;
 }

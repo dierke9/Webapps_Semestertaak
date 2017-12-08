@@ -1,0 +1,23 @@
+.table{
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+.header{
+    border-radius: 10px;
+    background-color: #202123;
+    margin-top: 10px;
+}
+
+p,h2,b{
+    margin-left: 10px;
+}
+.pHeader{
+    padding-bottom: 10px;
+}
+a{
+    text-decoration: none;
+    text-decoration-line: underline;
+    color: white;
+}

@@ -1,0 +1,15 @@
+.articleImg{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+.articleText{
+    margin-top: 10px;
+}
+.articleTitle{
+    text-align: center;
+}
+.btn{
+    margin: 8px;
+}

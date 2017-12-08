@@ -1,8 +1,8 @@
-<div *ngIf="article">
-  <img [src]="getimage()">
-  <h1>{{article.Title}}</h1>
+<div *ngIf="article" class="main">
+  <img [src]="getimage()" class="articleImg">
+  <h1 class="articleTitle">{{article.Title}}</h1>
   <b>{{article.Summary}}</b>
-  <p>{{article.Content}}</p>
+  <p class="articleText">{{article.Content}}</p>
   <table class="table table-dark">
     <tbody>
       <tr *ngFor="let comment of article.comments"> 

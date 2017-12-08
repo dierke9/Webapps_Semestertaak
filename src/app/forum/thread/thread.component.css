@@ -1,3 +1,12 @@
 .icon{
     height: 15px;
 }
+.header{
+    border-radius: 10px;
+    background-color: #202123;
+    margin-top: 10px;
+}
+h2{
+    margin-left: 10px;
+    padding-bottom: 10px;
+}

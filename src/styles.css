@@ -3,3 +3,14 @@
 @import "../3rdParty/semantic.min.css";
 @import "../3rdParty/bootstrap/css/bootstrap.min.css";
 @import "../3rdParty/font/css/open-iconic-bootstrap.css";
+body{
+    background-image: url('./assets/Background.jpg');
+}
+.main{
+    color: white;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.btn{
+    margin: 8px;
+}

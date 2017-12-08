@@ -1,8 +1,10 @@
-<div *ngIf="subCategory">
+<div *ngIf="subCategory" class="main">
   <button class="btn btn-success float-right" (click)="newThread()">New Thread</button>
+  <div class="header">
   <h1>{{subCategory.Title}}</h1>
-  <p>{{subCategory.Description}}</p>
-  <table>
+  <p class="pHeader">{{subCategory.Description}}</p>
+  </div>
+  <table class="table table-striped; table-dark">
     <thead>
       <tr>
         <th>Thread</th>
@@ -14,15 +16,15 @@
         <td>
           <div>
             <a routerLink="/thread/{{thread.id}}" routerLinkActive='active'>
-              <b>{{thread.title}}</b>
-              <p>Created by {{thread.creator.username}}</p>
+              <b>{{thread.title}}</b></a>
+              <p>Created by <a routerLink="/profile/{{thread.creator.username}}" routerLinkActive="active">{{thread.creator.username}}</a></p>
               <p>Last posted at {{thread.lastPostTime}}</p>
-            </a>
+            
           </div>
         </td>
         <td>
           <div>
-            <a>
+            <a routerLink="/profile/{{thread.lastPost.username}}" routerLinkActive="active">
               <b>{{thread.lastPost.username}}</b>
             </a>
           </div>
@@ -30,5 +32,5 @@
       </tr>
     </tbody>
   </table>
-  <ngb-pagination [(page)]="page" aria-label="Default pagination" [collectionSize]="ThreadCount"></ngb-pagination>     
+  <ngb-pagination [(page)]="page" aria-label="Default pagination" [collectionSize]="ThreadCount" class="pagination"></ngb-pagination>     
   </div>

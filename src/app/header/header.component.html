@@ -18,7 +18,7 @@
     </ul>
     <ul class="nav navbar-nav justify-content-end">
       <li class="dropdown" *ngIf="(currentuser | async) else Login">
-        <a class="nav-link dropdown-toggle">{{currentuser | async}}</a>
+        <a class="nav-link dropdown-toggle" routerLink="/profile/{{currentuser | async}}">{{currentuser | async}}</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" routerLink='/settings'>Settings</a>
           <a class="dropdown-item" routerLink='/logout'>Logout</a>

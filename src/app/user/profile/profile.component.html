@@ -1,5 +1,6 @@
-<div *ngIf="user">
-  <table>
+<div *ngIf="user" class="main">
+  <h2>Information from {{user.username}}</h2>
+  <table class="table table-sm table-dark">
     <tr>
       <th>Username</th>
       <td>{{user.username}}</td>

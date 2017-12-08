@@ -1,0 +1,27 @@
+a{
+    text-decoration: none;
+    color: white;
+    text-decoration-line: underline;
+}
+
+.catA{
+    margin: 10px;
+}
+
+.table{
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+.header{
+    border-radius: 10px;
+    background-color: #202123;
+    margin-top: 10px;
+}
+p{
+    margin-left: 10px;
+}
+h2{
+    margin-left: 10px;
+}

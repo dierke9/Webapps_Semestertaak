@@ -1,13 +1,15 @@
-<div *ngIf='category'>
-  <button *ngIf="isAdmin" class="btn btn-success float-right" (click)='addSubCat()'>Add subcategory</button>    
+<div *ngIf='category' class="main">
+  <button *ngIf="isAdmin" class="btn btn-success float-right" (click)='addSubCat()'>Add subcategory</button>
   <h1>{{category.Title}}</h1>
   <p>{{category.Description}}</p>
   <div *ngFor='let subCat of category.SubCats'>
+    <div class="header">
     <a routerLink="/subCategory/{{subCat.id}}" routerLinkActive="active">
-    <h2>{{subCat.Title}}</h2>
-    <p>{{subCat.Description}}</p>
+    <h2 class="hHeader">{{subCat.Title}}</h2>
+    <p class="pHeader">{{subCat.Description}}</p>
     </a>
-    <table>
+    </div>
+    <table class="table table-striped table-dark">
       <thead>
         <tr>
           <th>Thread</th>
@@ -19,15 +21,14 @@
           <td>
             <div>
               <a routerLink="/thread/{{thread.id}}" routerLinkActive='active'>
-                <b>{{thread.title}}</b>
-                <p>Created by {{thread.creator.username}}</p>
+                <b>{{thread.title}}</b></a>
+                <p>Created by <a routerLink="/profile/{{thread.creator.username}}" routerLinkActive="active">{{thread.creator.username}}</a></p>
                 <p>Last posted at {{thread.lastPostTime}}</p>
-              </a>
             </div>
           </td>
           <td>
             <div>
-              <a>
+              <a routerLink="/profile/{{thread.lastPost.username}}" routerLinkActive="active">
               <b>{{thread.lastPost.username}}</b>
               </a>
             </div>
