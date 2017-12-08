@@ -141,6 +141,7 @@ router.post('/API/newSubCat', function (req, res, next) {
   let subcat = new SubCategory({ title: req.body.title, description: req.body.description });
   subcat.save(function (e, saved) {
     Category.update({ _id: mongoose.Types.ObjectId(req.body.categoryid) }, { $push: { subCats: saved } }, function (error, category) {
+      console.log(category);
       if (error) { return next(error) }
       res.json(saved)
     })
